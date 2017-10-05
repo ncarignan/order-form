@@ -1,7 +1,7 @@
 'use strict';
 
 var allProducts = [];
-
+//localstorage.cartArray
 (function localStorageAlign1(){
   if(!localStorage.allProducts){
     newInstances();
@@ -16,8 +16,7 @@ var allProducts = [];
 function Product(name, filepath){
   this.name = name;
   this.filepath = filepath;
-  this.count = 0;
-  this.picked = 0;
+  this.numInCart = 0;
   allProducts.push(this);
 }
 
@@ -43,3 +42,28 @@ function newInstances(){
   new Product('water can', 'img/water-can.jpg');
   new Product('wine glass', 'img/wine-glass.jpg');
 }
+
+
+(function(){
+  for(var i in allProducts){
+    var productDropdown = document.getElementById('productDrop');
+    // console.log(productDropdown);
+    var optionEl = document.createElement('option');
+    // console.log(optionEl);
+    optionEl.textContent = allProducts[i].name;
+    // console.log(optionEl);
+    productDropdown.appendChild(optionEl);
+  }
+})();
+
+var addToCart = document.getElementById('addToCart');
+addToCart.addEventListener('submit', handleAddToCartSubmit);
+
+function handleAddToCartSubmit(event){
+  console.log('fired');
+  console.log(event);
+  event.preventDefault();
+  var product = event.target.product.value;
+  console.log(event.target.product.value);
+  var quantity = parseInt(event.target.quantity.value);
+};

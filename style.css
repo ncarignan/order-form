@@ -1,1 +1,16 @@
-/*css*/
+nav ul{
+  float:right;
+  width:250px;
+}
+nav li{
+  display:inline-block;
+}
+nav{
+  height:150px;
+}
+input{
+  /*margin-left: 400px;*/
+}
+label{
+  /*margin-left: 200px;*/
+}
