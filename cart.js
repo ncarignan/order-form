@@ -64,8 +64,9 @@ buyButton.addEventListener('click', buyHandler);
 
 function buyHandler(event){
   console.log(event.target.id);
-  localStorage.removeItem('cartArray');
+  // localStorage.removeItem('cartArray');
   cartArray = [];
+  localStorage.cartArray = JSON.stringify(cartArray);
   clearTable();
   tableData();
 }

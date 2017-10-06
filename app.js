@@ -2,7 +2,8 @@
 var allProducts = [];
 var cartArray = [];
 var addToCart = document.getElementById('addToCart');
-
+var storeForm = document.getElementById('storeForm');
+var welcomeBack = document.getElementById('welcomeBackMessage');
 function Product(name, filepath){
   this.name = name;
   this.filepath = filepath;
@@ -73,3 +74,38 @@ function handleAddToCartSubmit(event){
     }
   }
 };
+storeForm.addEventListener('submit', handleStoreFormSubmit);
+
+if(localStorage.userName){
+  welcomeBack.textContent = 'Welcome back ' + localStorage.userName + '!';
+  var buttonEl = document.createElement('button');
+  buttonEl.textContent = 'Click here to change billing information';
+  buttonEl.type = 'click';
+  buttonEl.addEventListener('click', handleWelcomeBackClick);
+  welcomeBack.appendChild(buttonEl);
+  storeForm.style.visibility = 'hidden';
+}
+function handleWelcomeBackClick(){
+  storeForm.style.visibility = 'visible';
+}
+
+function handleStoreFormSubmit(event){
+  event.preventDefault();
+  var userName = event.target.userName.value;
+  // var address = event.target.address.value;
+  // var city = event.target.city.value;
+  // var state = event.target.state.value;
+  // var zip = event.target.zip.value;
+  // var phoneNumber = event.target.phoneNumber.value;
+  // var creditCardNumber = event.target.creditCardNumber.value;
+  // var cvv = event.target.cvv.value;
+  localStorage.userName = userName;
+  event.target.userName.value = null;
+  event.target.address.value = null;
+  event.target.city.value = null;
+  event.target.state.value = null;
+  event.target.zip.value = null;
+  event.target.phoneNumber.value = null;
+  event.target.creditCardNumber.value = null;
+  event.target.cvv.value = null;
+}
