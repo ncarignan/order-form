@@ -7,7 +7,7 @@ cartArray = JSON.parse(localStorage.cartArray);
 
 function newElement(type, content, parent) {
   var newEl = document.createElement(type);
-  newEl.textContent = content;
+  newEl.innerHTML = content;
   parent.appendChild(newEl);
 };
 
@@ -19,15 +19,15 @@ function tableData(){
   for (var i = 0; i < cartArray.length; i++){
     var trEl = document.createElement('tr');
     newElement('th', cartArray[i].name, trEl);
-    var imgEl = document.createElement('img');
-    img.src = cartArray[i].filepath;
-    newElement('td', imgEl, trEl);
+    // var imgEl = document.createElement('img');
+    // imgEl.src = cartArray[i].filepath;
+    newElement('td', '<img src="' + cartArray[i].filepath + '"></img>', trEl);
     newElement('td', cartArray[i].numInCart, trEl);
-    var butEl = document.createElement('button');
-    butEl.id = 'button' + i;
-    butEl.innerHTML = 'Remove from Cart';
-    newElement('td', butEl, trEl);
-    user.appendChild(trEl);
+    // var butEl = document.createElement('button');
+    // butEl.id = 'button' + i;
+    // butEl.innerHTML = 'Remove from Cart';
+    newElement('td', '<button type="submit" id="button' + i + '"> Remove from Cart </button>', trEl);
+    cartTable.appendChild(trEl);
   }
 };
 
@@ -46,8 +46,17 @@ function deletePress(i){
 cartTable.addEventListener('click', clickHandler);
 
 function clickHandler(event){
+  console.log('triggered!');
   var check = event.target.id;
+  for (var j = 0; j < cartArray.length; j++){
+    if (!isNaN(check)){
+      console.log('checking +', check);
+      return alert('Click on a button!');
+    }
+  }
+  console.log(check);
   var i = parseInt(check.slice(check.length - 1));
+  console.log(i);
   deletePress(i);
 }
 
